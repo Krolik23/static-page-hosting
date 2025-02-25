@@ -4,6 +4,7 @@ import os
 from datetime import datetime
 from imports.s3_object_module import S3ObjectModule
 
+# Handles deployment of static content to S3 with versioning via timestamp
 class StaticPageContentConstruct(Construct):
     def __init__(self, scope: Construct, id: str, s3_bucket: Construct):
         super().__init__(scope, id)
@@ -18,9 +19,9 @@ class StaticPageContentConstruct(Construct):
     def _upload_content(self, s3_bucket):
         timestamp = datetime.now().strftime('%Y-%m-%d %H:%M:%S')
         S3ObjectModule(self, "static-page",
-            key="static/index.html",
+            key="static/index.html", # Matches CloudFront default root object
             bucket=s3_bucket.bucket.s3_bucket_id_output,
             content=Fn.templatefile(self.asset.path, {"timestamp": timestamp}),
             content_type="text/html",
-            source_hash=Fn.filemd5(self.asset.path)
+            source_hash=Fn.filemd5(self.asset.path) # Triggers update on file changes
         )
