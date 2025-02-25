@@ -25,7 +25,6 @@ class S3BucketPolicyConstruct(Construct):
         )
 
         S3BucketPolicy(self, "s3-bucket-policy",
-            # bucket=bucket_arn.split(':::')[-1],  # Extract bucket name from ARN
             bucket=s3_bucket.bucket_id,
             policy=self.policy_document.json
         )
