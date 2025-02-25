@@ -1,0 +1,28 @@
+{
+  "language": "python",
+  "app": "pipenv run python app.py",
+  "projectId": "9354bf18-5169-46cf-8ad9-0fe3ecc4e794",
+  "sendCrashReports": "false",
+  "terraformProviders": [
+    "hashicorp/aws@~> 5.88"
+  ],
+  "terraformModules": [
+    {
+      "name": "s3_module",
+      "source": "terraform-aws-modules/s3-bucket/aws",
+      "version": "~> 4.6.0"
+    },
+    {
+      "name": "s3_object_module",
+      "source": "terraform-aws-modules/s3-bucket/aws//modules/object",
+      "version": "~> 4.6.0"
+    },
+    {
+      "name": "cf_module",
+      "source": "terraform-aws-modules/cloudfront/aws",
+      "version": "~> 4.1.0"
+    }
+  ],
+  "codeMakerOutput": "imports",
+  "context": {}
+}
